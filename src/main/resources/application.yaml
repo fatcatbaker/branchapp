@@ -1,0 +1,26 @@
+# Server configuration
+server:
+    port: 8080
+    servlet:
+        context-path: /api
+
+# Application name
+spring:
+    application:
+        name: jbooke-demo
+    # Cache configuration
+    cache:
+        type: caffeine
+        caffeine:
+            spec: maximumSize=100,expireAfterAccess=60s
+
+# Logging configuration
+logging:
+    level:
+        org:
+            springframework:
+                cache: TRACE
+        root: INFO
+
+github:
+    base-url: https://api.github.com
