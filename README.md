@@ -17,9 +17,8 @@ This demo project has been created to show how to use the Github API to retrieve
 
 
 ### Installation
-Provide step-by-step instructions to install your project. For example:
-1. Clone the repository: `git clone [repository link]`
-2. Navigate to the project directory: `cd [project name]`
+1. Clone the repository: `git clone https://github.com/fatcatbaker/branchapp.git`
+2. Navigate to the project directory: `cd branchapp`
 3. Install dependencies: `mvn install` 
 
 
