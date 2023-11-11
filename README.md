@@ -30,14 +30,14 @@ This project is set up to run on port 8080.  If you'd like to specify a differen
 
 ### Testing the Application
 This is a GET endpoint that takes a username as a path parameter.  The endpoint will return a JSON response with the user information.
-<br>`GET http://localhost:8080/api/v1/{username}` </br>
+<br>`GET http://localhost:8080/api/v1/user/{username}` </br>
 <br>The response will be cached for 1 minute.  If the same username is requested within 1 minutes, the response will be returned from the cache.</br>
 
 To test the endpoint, use Postman, cURL or use the rest client of your choice.
 
-- Example request:  http://localhost:8080/api/v1/octocat 
+- Example request:  http://localhost:8080/api/v1/user/octocat 
 - Response:  A 200 response and JSON payload containing the user information and their Github repositories
-- Example request: http://localhost:8080/api/v1/octocat-is-gone 
+- Example request: http://localhost:8080/api/v1/user/octocat-is-gone 
 - Response:  A 404 response indicating that the resource is not found.
 
 Note that these endpoints are not protected.   spring-boot-security-starter would need to be added to add Spring Security features.
