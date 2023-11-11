@@ -33,7 +33,7 @@ public class GithubErrorDecoder implements ErrorDecoder {
                 Map<String, Collection<String>> errorHeaders = response.headers();
                 Collection<String> headerValues = errorHeaders.get("retry-after");
 
-                Long retryAfter = 0L;
+                long retryAfter;
 
                 if (!CollectionUtils.isEmpty(headerValues)) {
                     retryAfter = Long.parseLong(errorHeaders.get("retry-after").iterator().next());
