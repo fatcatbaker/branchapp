@@ -15,7 +15,6 @@ import java.util.Map;
 
 @Slf4j
 public class GithubErrorDecoder implements ErrorDecoder {
-
     private final ErrorDecoder defaultErrorDecoder = new Default();
 
     @Override

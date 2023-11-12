@@ -12,11 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/v1/user", produces = {MediaType.APPLICATION_JSON_VALUE, "application/json"})
+@RequestMapping(value = "/v1/user", produces = {MediaType.APPLICATION_JSON_VALUE})
 @Slf4j
 public class UserController {
     private final UserService userService;
-
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;

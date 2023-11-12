@@ -10,6 +10,7 @@ public interface UserMapper {
     @Mapping(target = "userName", source = "login")
     @Mapping(target = "displayName", source = "name")
     @Mapping(target = "avatar", source = "avatarUrl")
+    @Mapping(target = "url", source = "htmlUrl")
     @Mapping(target = "geoLocation", source = "location")
     User githubUserToUser(GithubUser githubUser);
 

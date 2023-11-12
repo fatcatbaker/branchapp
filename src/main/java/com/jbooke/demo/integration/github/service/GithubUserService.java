@@ -14,9 +14,7 @@ import java.util.List;
 @Service
 @Slf4j
 public class GithubUserService {
-
     private final GithubUserClient githubUserClient;
-
     @Autowired
     public GithubUserService(GithubUserClient githubUserClient) {
         this.githubUserClient = githubUserClient;

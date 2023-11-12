@@ -3,7 +3,6 @@ package com.jbooke.demo.integration.github.config;
 import feign.Logger;
 import org.springframework.context.annotation.Bean;
 
-
 public class GithubClientConfiguration {
     @Bean
     public Logger.Level feignLoggerLevel() {
