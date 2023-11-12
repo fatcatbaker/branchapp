@@ -15,6 +15,7 @@ import java.util.List;
 @Slf4j
 public class GithubUserService {
     private final GithubUserClient githubUserClient;
+
     @Autowired
     public GithubUserService(GithubUserClient githubUserClient) {
         this.githubUserClient = githubUserClient;
@@ -23,6 +24,7 @@ public class GithubUserService {
     public GithubUser getGithubUserByUsername(String username) {
         return githubUserClient.getUserByUsername(username);
     }
+
     public List<GithubUserRepository> getGithubUserRepositoriesByUsername(String username) {
         List<GithubUserRepository> githubUserRepositories = githubUserClient.getUserRepositoriesByUsername(username);
 
