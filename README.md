@@ -49,8 +49,8 @@ To test the endpoint, use Postman, cURL or use the rest client of your choice.
 
 ---
 ## Testing
-Explain how to run tests for your application. For example:
-- Run `mvn test` or `gradle test`
+A simple unit test has been created to test the UserService.  With additional time, I would have added more unit tests and integration tests.
+- Run `mvn test` to run the unit tests
 ---
 
 ## Contact
