@@ -1,5 +1,6 @@
 package com.jbooke.demo.user.service;
 
+import com.jbooke.demo.integration.github.exceptions.ResourceNotFoundException;
 import com.jbooke.demo.integration.github.model.GithubUser;
 import com.jbooke.demo.integration.github.model.GithubUserRepository;
 import com.jbooke.demo.integration.github.service.GithubUserService;
@@ -16,6 +17,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -39,9 +41,8 @@ class UserServiceTest {
     }
 
     @Test
-    void testGetGitHubUserDetails() {
+    void testGetGitHubUserDetailsSuccess() {
         // Setup
-        // Configure GithubUserService.getGithubUserByUsername(...).
         final GithubUser githubUser = new GithubUser();
         final String username = "octocat";
         final String displayName = "The Octocat";
@@ -60,7 +61,7 @@ class UserServiceTest {
         githubUser.setAvatarUrl(avatarUrl);
         githubUser.setCreatedAt(createDateTime);
         githubUser.setHtmlUrl(htmlUrl);
-        when(mockGithubUserService.getGithubUserByUsername(username)).thenReturn(githubUser);
+        when(mockGithubUserService.getGithubUserByUsername(username)).thenReturn(Optional.of(githubUser));
 
         // Configure GithubUserService.getGithubUserRepositoriesByUsername(...).
         final List<GithubUserRepository> githubUserRepositories = List.of(new GithubUserRepository(repositoryName, repositoryUrl));
@@ -93,5 +94,16 @@ class UserServiceTest {
         assertNull(result.getEmail());
         assertEquals(1, result.getRepositories().size());
         assertEquals(repositoryName, result.getRepositories().get(0).getName());
+    }
+
+    @Test
+    void testGetGitHubUserDetailsGithubUserIsEmpty() {
+        // Setup
+        // Configure GithubUserService.getGithubUserByUsername(...).
+        final Optional<GithubUser> githubUser = Optional.empty();
+        final String username = "user-that-is-empty";
+        when(mockGithubUserService.getGithubUserByUsername(username)).thenReturn(githubUser);
+
+        assertThrows(ResourceNotFoundException.class, () -> userServiceUnderTest.getGitHubUserDetails(username));
     }
 }

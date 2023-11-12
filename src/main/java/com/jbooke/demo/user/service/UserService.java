@@ -1,5 +1,6 @@
 package com.jbooke.demo.user.service;
 
+import com.jbooke.demo.integration.github.exceptions.ResourceNotFoundException;
 import com.jbooke.demo.integration.github.model.GithubUser;
 import com.jbooke.demo.integration.github.model.GithubUserRepository;
 import com.jbooke.demo.integration.github.service.GithubUserService;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -35,7 +37,10 @@ public class UserService {
     public User getGitHubUserDetails(String username) {
         Assert.notNull(username, "Username cannot be null");
 
-        GithubUser githubUser = getGithubUser(username);
+        Optional<GithubUser> githubUserOptional = getGithubUser(username);
+        //This has been added for safety.  A 404 is thrown from Github if the user is not found.
+        //But, if the API changes and returns a 200 with an empty body this will prevent an NPE.
+        GithubUser githubUser = githubUserOptional.orElseThrow(() -> new ResourceNotFoundException("Github user not found"));
 
         List<GithubUserRepository> githubUserRepositories = getGithubUserRepositories(username);
 
@@ -47,9 +52,10 @@ public class UserService {
         return user;
     }
 
-    private GithubUser getGithubUser(String username) {
+    private Optional<GithubUser> getGithubUser(String username) {
         return githubUserService.getGithubUserByUsername(username);
     }
+
     private List<GithubUserRepository> getGithubUserRepositories(String username) {
         return githubUserService.getGithubUserRepositoriesByUsername(username);
     }

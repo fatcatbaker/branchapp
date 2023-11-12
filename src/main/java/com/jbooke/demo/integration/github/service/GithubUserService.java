@@ -10,6 +10,7 @@ import org.springframework.util.CollectionUtils;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -21,8 +22,8 @@ public class GithubUserService {
         this.githubUserClient = githubUserClient;
     }
 
-    public GithubUser getGithubUserByUsername(String username) {
-        return githubUserClient.getUserByUsername(username);
+    public Optional<GithubUser> getGithubUserByUsername(String username) {
+        return Optional.ofNullable(githubUserClient.getUserByUsername(username));
     }
 
     public List<GithubUserRepository> getGithubUserRepositoriesByUsername(String username) {
